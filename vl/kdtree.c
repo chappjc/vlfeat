@@ -176,8 +176,8 @@ vl_kdtree_build_recursively
   /* base case: there is only one data point */
   if (dataEnd - dataBegin <= 1) {
     if (tree->depth < depth) tree->depth = depth ;
-    node->lowerChild = - dataBegin - 1;
-    node->upperChild = - dataEnd - 1 ;
+    node->lowerChild = - (signed) dataBegin - 1;
+    node->upperChild = - (signed) dataEnd - 1 ;
     return ;
   }
 
@@ -250,8 +250,8 @@ vl_kdtree_build_recursively
 
   /* additional base case: the maximum variance is equal to 0 (overlapping points) */
   if (forest->splitHeapNumNodes == 0) {
-    node->lowerChild = - dataBegin - 1 ;
-    node->upperChild = - dataEnd - 1 ;
+    node->lowerChild = - (signed) dataBegin - 1 ;
+    node->upperChild = - (signed) dataEnd - 1 ;
     return ;
   }
 

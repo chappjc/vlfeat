@@ -11,7 +11,7 @@ This file is part of the VLFeat library and is made available under
 the terms of the BSD license (see the COPYING file).
 */
 
-#if ! defined(VL_DISABLE_SSE2) & ! defined(__SSE2__)
+#if ! defined(VL_DISABLE_SSE2) && ! defined(__SSE2__) && !defined(_M_IX86_FP) && !defined(__AVX__)
 #error "Compiling with SSE2 enabled, but no __SSE2__ defined"
 #endif
 

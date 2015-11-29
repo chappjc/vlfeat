@@ -31,7 +31,7 @@ the terms of the BSD license (see the COPYING file).
 #else
 #ifndef VL_DISABLE_SSE2
 
-#ifndef __SSE2__
+#if !defined(__SSE2__) && !defined(_M_IX86_FP) && !defined(__AVX__) && !defined(__AVX2__)
 #error Compiling SSE2 functions but SSE2 does not to be supported by the compiler.
 #endif
 

@@ -805,13 +805,13 @@ _vl_sift_smooth (VlSiftFilt * self,
   vl_imconvcol_vf (tempImage, height,
                    inputImage, width, height, width,
                    self->gaussFilter,
-                   - self->gaussFilterWidth, self->gaussFilterWidth,
+                   - (signed) self->gaussFilterWidth, self->gaussFilterWidth,
                    1, VL_PAD_BY_CONTINUITY | VL_TRANSPOSE) ;
 
   vl_imconvcol_vf (outputImage, width,
                    tempImage, height, width, height,
                    self->gaussFilter,
-                   - self->gaussFilterWidth, self->gaussFilterWidth,
+                   - (signed) self->gaussFilterWidth, self->gaussFilterWidth,
                    1, VL_PAD_BY_CONTINUITY | VL_TRANSPOSE) ;
 }
 

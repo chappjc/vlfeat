@@ -427,11 +427,11 @@ $(mexdir) :
 # special sources with SSE2 support
 $(objdir)\mathop_sse2.obj : vl\mathop_sse2.c
 	@echo .... CC [+SSE2] $(@)
-	@$(CC) $(CFLAGS) $(DLL_CFLAGS) /arch:SSE2 /D"__SSE2__" /c /Fo"$(@)" "vl\$(@B).c"
+	@$(CC) $(CFLAGS) $(DLL_CFLAGS) /arch:AVX /D"__SSE2__" /c /Fo"$(@)" "vl\$(@B).c"
 
 $(objdir)\imopv_sse2.obj : vl\imopv_sse2.c
 	@echo .... CC [+SSE2] $(@)
-	@$(CC) $(CFLAGS) $(DLL_CFLAGS) /arch:SSE2 /D"__SSE2__" /c /Fo"$(@)" "vl\$(@B).c"
+	@$(CC) $(CFLAGS) $(DLL_CFLAGS) /arch:AVX /D"__SSE2__" /c /Fo"$(@)" "vl\$(@B).c"
 
 # vl\*.c -> $objdir\*.obj
 {vl}.c{$(objdir)}.obj:

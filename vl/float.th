@@ -80,7 +80,7 @@ the terms of the BSD license (see the COPYING file).
 /*                                                             SSE2 */
 /* ---------------------------------------------------------------- */
 
-#ifdef __SSE2__
+#if defined(__SSE2__) || _M_IX86_FP>=1 || defined(__AVX__)
 
 #if (FLT == VL_TYPE_FLOAT)
 #  define VSIZE  4

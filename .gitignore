@@ -58,3 +58,4 @@ opt/*
 
 # iDraw files
 *.idraw
+*.sdf
