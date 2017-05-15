@@ -43,6 +43,9 @@ vlfeat.suo
 vlfeat.ncb
 vlfeat.vcproj.*.user
 vc/*
+*.VC.db
+.vs/
+*.suo
 
 # Emacs backups
 *~

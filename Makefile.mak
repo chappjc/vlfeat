@@ -34,11 +34,11 @@ WINSDKROOT = $(WINDOWSSDKDIR)
 GIT = git
 
 !if "$(MSVCROOT)" == ""
-MSVCROOT = C:\Program Files\Microsoft Visual Studio 10.0\VC
+MSVCROOT = C:\Program Files\Microsoft Visual Studio 10.0\VC\
 !endif
 
 !if "$(WINSDKROOT)" == ""
-WINSDKROOT = C:\Program Files\Microsoft SDKs\Windows\v7.0A
+WINSDKROOT = C:\Program Files\Microsoft SDKs\Windows\v7.0A\
 !endif
 
 !include make/nmake_helper.mak
@@ -47,7 +47,7 @@ WINSDKROOT = C:\Program Files\Microsoft SDKs\Windows\v7.0A
 !if "$(ARCH)" == "win32"
 !message === COMPILING FOR 32-BIT
 
-MATLABROOT = C:\Program Files (x86)\MATLAB\R2010b
+MATLABROOT = C:\MATLABx86\R2017a
 MEX = "$(MATLABROOT)\bin\mex.bat"
 MEXOPT = "$(MATLABROOT)\bin\win32\mexopts\msvc$(MSVSVER)opts.bat"
 MEXEXT = mexw32
@@ -65,18 +65,18 @@ LFLAGS = /MACHINE:X86 \
 !elseif "$(ARCH)" == "win64"
 !message === COMPILING FOR 64-BIT
 
-MATLABROOT = C:\Program Files\MATLAB\R2010b
+MATLABROOT = C:\MATLAB\R2017a
 MEX = "$(MATLABROOT)\bin\mex.bat"
-MEXOPT = "$(MATLABROOT)\bin\win64\mexopts\msvc$(MSVSVER)opts.bat"
+MEXOPT = "$(MATLABROOT)\bin\win64\mexopts\msvc2015.xml"
 MEXEXT = mexw64
 MEX_FLAGS = -largeArrayDims
 
 CC = "$(MSVCROOT)\bin\amd64\cl.exe"
 LINK = "$(MSVCROOT)\bin\amd64\link.exe"
 !if $(MSVSVER) >= 100
-MSVCR_PATH = $(MSVCROOT)\redist\x64\Microsoft.VC$(MSVSVER).CRT
+MSVCR_PATH = $(MSVCROOT)redist\x64\Microsoft.VC$(MSVSVER).CRT
 !else
-MSVCR_PATH = $(MSVCROOT)\redist\amd64\Microsoft.VC$(MSVSVER).CRT
+MSVCR_PATH = $(MSVCROOT)redist\amd64\Microsoft.VC$(MSVSVER).CRT
 !endif
 
 LFLAGS = /MACHINE:X64 \
@@ -347,12 +347,12 @@ mexcrt = $(mexdir)\msvcr$(MSVSVER).dll
 
 !ifdef MATLABROOT
 all: $(bindir) $(objdir) $(mexdir) \
-     $(bincrt) $(bindir)\vl.lib $(bindir)\vl.dll \
+     $(bindir)\vl.lib $(bindir)\vl.dll \
      $(cmdexe) \
-     $(mexcrt) $(mexdir)\vl.dll $(mexdll)
+     $(mexdir)\vl.dll $(mexdll)
 !else
 all: $(bindir) $(objdir) \
-     $(bincrt) $(bindir)\vl.lib $(bindir)\vl.dll \
+     $(bindir)\vl.lib $(bindir)\vl.dll \
      $(cmdexe)
 !endif
 
@@ -451,11 +451,11 @@ $(bindir)\vl.lib : $(libobj)
 	@lib $(**) /OUT:"$(@)" /NOLOGO
 
 # redistributable: msvcr__.dll => bin/win{32,64}/msvcr__.dll
-$(bindir)\$(MSVCR).manifest : "$(MSVCR_PATH)\$(MSVCR).manifest"
-        copy $(**) "$(@)"
+# $(bindir)\$(MSVCR).manifest : "$(MSVCR_PATH)\$(MSVCR).manifest"
+#         copy $(**) "$(@)"
 
-$(bindir)\msvcr$(MSVSVER).dll: "$(MSVCR_PATH)\msvcr$(MSVSVER).dll"
-        copy $(**) "$(@)"
+# $(bindir)\msvcr$(MSVSVER).dll: "$(MSVCR_PATH)\msvcr$(MSVSVER).dll"
+#         copy $(**) "$(@)"
 
 # --------------------------------------------------------------------
 #                                Rules to compile the VLFeat EXE files
@@ -530,11 +530,11 @@ $(mexdir)\vl.dll : $(bindir)\vl.dll
 #	@-del "$(@R).dll.manifest"
 
 # redistributable: msvcr__.dll => bin/win{32,64}/msvcr__.dll
-$(mexdir)\$(MSVCR).manifest : "$(MSVCR_PATH)\$(MSVCR).manifest"
-        copy $(**) "$(@)"
+# $(mexdir)\$(MSVCR).manifest : $(MSVCR_PATH)\$(MSVCR).manifest
+#         copy $(**) "$(@)"
 
-$(mexdir)\msvcr$(MSVSVER).dll: "$(MSVCR_PATH)\msvcr$(MSVSVER).dll"
-        copy $(**) "$(@)"
+# $(mexdir)\msvcr$(MSVSVER).dll: $(MSVCR_PATH)\msvcr$(MSVSVER).dll
+#         copy $(**) "$(@)"
 
 # --------------------------------------------------------------------
 #                                       Rules to post the binary files
